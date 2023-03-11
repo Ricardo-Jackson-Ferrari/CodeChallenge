@@ -1,7 +1,7 @@
 ## @ system
 .PHONY: run
 run: ## run the system
-	docker-compose up --build
+	docker-compose up --build -V
 stop: ## stop the system
 	docker-compose down
 

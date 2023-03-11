@@ -1,9 +1,10 @@
 from django.db import models
-
+from .utils import generate_ref_code
 
 class SimpleUser(models.Model):
     username = models.CharField(max_length=150)
     email = models.EmailField(unique=True)
+    ip_address = models.GenericIPAddressField(null=True)
 
 
 class Profile(models.Model):
@@ -15,3 +16,13 @@ class Profile(models.Model):
 
     def __str__(self) -> None:
         return self.user
+
+    def get_recommened_profiles(self):
+        pass
+
+    def save(self, args, **kwargs):
+        if self.code == "":
+            code = generate_ref_code()
+            self.code = code
+
+        super().save(args, **kwargs)
