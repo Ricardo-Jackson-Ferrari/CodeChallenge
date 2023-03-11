@@ -1,14 +1,25 @@
-FROM python:3.11 as python
+FROM python:3.11-slim
 
-ENV PIP_DISABLE_PIP_VERSION_CHECK=on
-ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-RUN pip install poetry
+RUN apt update
 
-WORKDIR /app
-COPY poetry.lock pyproject.toml /app/
+RUN pip install pipenv
 
-RUN poetry config virtualenvs.create false
-RUN poetry install --no-interaction --without dev
+COPY Pipfile .
+COPY Pipfile.lock .
+
+RUN pipenv install --system --deploy --ignore-pipfile
+
+RUN mkdir -p /home/python
+
+ENV HOME=/home/python
+ENV APP_HOME=/home/python/app
+
+RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/staticfiles
+RUN mkdir $APP_HOME/media
+WORKDIR $APP_HOME
 
 COPY . .
