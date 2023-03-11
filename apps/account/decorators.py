@@ -9,5 +9,4 @@ def not_login_required(redirect_url='/'):
             return func(request, *args, **kwargs)
 
         return wrapper
-
     return _func

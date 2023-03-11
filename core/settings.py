@@ -155,18 +155,14 @@ MESSAGE_TAGS = {
     constants.WARNING: 'alert-warning',
 }
 
-# Auth
-
-AUTH_USER_MODEL = 'account.User'
-
-
 # Email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 # CELERY
-CELERY_BROKER_URL = 'REDIS://127.0.0.1:6379/0'
-CELERY_BACKEND = 'redis://redis:6379/0'
+REDIS = config('REDIS')
+CELERY_BROKER_URL = f'REDIS://{REDIS}/0'
+CELERY_BACKEND = f'redis://{REDIS}:6379/0'
 
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'

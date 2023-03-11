@@ -9,7 +9,7 @@ services:
              python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
     volumes:
-      - .:/app/
+      - .:/home/python/app/
     ports:
       - 8000:8000
     networks:
@@ -17,21 +17,7 @@ services:
     env_file:
       - ./.env
     depends_on:
-      - db
       - redis
-
-  db:
-    image: postgres:alpine
-    container_name: "postgres-django-server"
-    volumes:
-      - django-db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    networks:
-      - django-network
-    env_file:
-      - ./.env
 
   redis:
     image: redis:alpine
@@ -52,7 +38,6 @@ services:
       - django-network
     depends_on:
       - redis
-      - db
 
 networks:
   django-network:
