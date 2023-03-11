@@ -1,11 +1,9 @@
 from django.shortcuts import redirect, render
 
-from .decorators import not_login_required
 from .forms import SimpleUserForm
 from .models import Profile
 
-@not_login_required()
-def register(request):
+def register(request):  # sourcery skip: extract-method, remove-unnecessary-else
     data = {'title': 'Registro'}
 
     if request.method == 'GET':
@@ -17,8 +15,16 @@ def register(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.ip_address = request.META['REMOTE_ADDR']
+            user.utm = request.POST.get('utm_source', '')
             user.save()
-            profile = Profile(user=user, recommended_by=user)
+            profile = Profile(user=user)
+            profile.utm = request.POST.get('utm_source', '')
+            code = request.POST.get('ref_code')
+            profile_ref = Profile.objects.filter(code=code)
+            if profile_ref.exists():
+                user_ref = profile_ref.first().user
+                if user_ref.ip_address != request.META['REMOTE_ADDR']:
+                    profile.recommended_by = user_ref
             profile.save()
             return redirect('account:register_success')
         else:

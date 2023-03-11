@@ -10,6 +10,9 @@ redis = "*"
 python-decouple = "*"
 django-celery-results = "*"
 psycopg2-binary = "*"
+pillow = "*"
+install = "*"
+qrcode = "*"
 
 [dev-packages]
 isort = "*"
