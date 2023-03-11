@@ -1,0 +1,9 @@
+SECRET_KEY=your_secret_key
+DEBUG=True
+POSTGRES_DB=db
+POSTGRES_USER=djangouser
+POSTGRES_HOST=db
+POSTGRES_PASSWORD=your_secret_key
+POSTGRES_PORT=5432
+REDIS=redis
+DOMAIN=localhost:8000

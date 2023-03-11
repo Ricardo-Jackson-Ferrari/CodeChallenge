@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "cadastro"
+version = "0.1.0"
+description = ""
+authors = ["Ricardo-Jackson-Ferrari <ricjferrari@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.1.3"
+celery = "^5.2.7"
+redis = "^4.3.5"
+python-decouple = "^3.6"
+psycopg2 = "^2.9.5"
+django-celery-results = "^2.4.0"
+
+
+[tool.poetry.group.dev.dependencies]
+ipdb = "^0.13.9"
+isort = "^5.10.1"
+blue = "^0.9.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

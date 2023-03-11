@@ -1,0 +1,26 @@
+<nav class="nav">
+    <a class="nav-logo" href="{% url 'common:index' %}">Logo</a>
+    <div class="nav-menu">
+        <ul class="nav-list">
+            <li>
+                <a href="{% url 'common:index' %}">Início</a>
+            </li>
+        </ul>
+        {% if not user.is_authenticated %}
+        <ul class="nav-list">
+            <li>
+                <a href="{% url 'account:login' %}">Login</a>
+            </li>
+            <li>
+                <a href="{% url 'account:register' %}">Cadastro</a>
+            </li>
+        </ul>
+        {% else %}
+        <ul class="nav-list">
+            <li>
+                <a href="{% url 'account:logout' %}">Logout</a>
+            </li>
+        </ul>
+        {% endif %}
+    </div>
+</nav>

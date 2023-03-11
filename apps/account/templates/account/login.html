@@ -1,0 +1,18 @@
+{% extends 'base_templates/base.html' %}
+{% load static %}
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'account/css/register.css' %}">
+{% endblock 'head' %}
+{% block 'body' %}
+<div class="container">
+    <div class="box">
+        {% include 'base_templates/partials/_messages.html' %}
+        <form action="{% url 'account:login' %}" method="POST">{% csrf_token %}
+            <h2>Conecte-se</h2>
+            <hr>
+            {{ form.as_p }}
+            <input type="submit" value="enviar" class="btn btn-success">
+        </form>
+    </div>
+</div>
+{% endblock 'body' %}

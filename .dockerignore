@@ -1,0 +1,10 @@
+*.pyc
+*.db
+*.sql.gz
+.git/
+.github/
+.venv
+__pycache__
+Dockerfile
+help.py
+Makefile
